@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+    <div style="display: flex;">
+        <iframe src="child1.html" id="iframe1" style="width: 50%;height: 500px;"></iframe>
+        <iframe src="child2.html" id="iframe2"style="width: 50%;height: 500px" ></iframe>
+    </div>
+  <script>
+      
+    window.addEventListener('message', function(event) {
+      console.log(event.data);
+      const iframe1 = document.getElementById("iframe1");
+      const iframe2 = document.getElementById("iframe2");
+      if(event.data.name==="iframe1"){
+        iframe2.contentWindow.postMessage(event.data, '*');
+      }else{
+        iframe1.contentWindow.postMessage(event.data, '*');
+      } 
+    });
+  </script>
+</body>
+</html>

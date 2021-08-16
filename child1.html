@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+
+  <h1>Iframe 1</h1> 
+  <h3>Received Messages</h3>
+  <p id="recievedmsg"></p>
+  <input type="text" name="msg" value="" id="msg_input">
+  <button id="button" onclick=sendMessageToAnotherIFrame()>Send Message</button>
+  <script>
+    window.addEventListener('message', function(event) {
+        console.log("event",event.data)
+        document.getElementsByTagName("p")[0].innerHTML=event.data.value;
+    });
+    function sendMessageToAnotherIFrame(){
+        const msg = document.getElementById('msg_input').value
+        window.parent.postMessage({name:'iframe1',value:msg}, '*');
+    }
+    
+  </script>
+
+</body>
+</html>
